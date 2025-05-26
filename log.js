@@ -200,13 +200,13 @@ function checkAlerts(data) {
     let showAlert = false;
     let message = '';
     
-    // Verificar condiciones de alerta
-    if (data.voltage > 250) {
+    // Verificar condiciones de alerta (modificado para nuevos rangos de voltaje)
+    if (data.voltage > 2) {
         showAlert = true;
-        message = '¡Alerta! Voltaje peligrosamente alto';
-    } else if (data.voltage < 100) {
+        message = '¡Alerta! Voltaje alto detectado';
+    } else if (data.voltage < 1) {  // Cambiado para alerta bajo 1V
         showAlert = true;
-        message = '¡Alerta! Voltaje peligrosamente bajo';
+        message = '¡Alerta! Voltaje bajo detectado';
     } else if (data.current > 4.5) {
         showAlert = true;
         message = '¡Alerta! Sobrecarga detectada';
@@ -277,16 +277,16 @@ function updateHistoryTable(data) {
         tableBody.deleteRow(-1);
     }
 
-    // Determinar estado del sistema
+    // Determinar estado del sistema (modificado para nuevos rangos de voltaje)
     const voltage = data.voltage;
     const current = data.current;
     let status = "Normal";
     let statusClass = "badge";
 
-    if (voltage > 250) {
+    if (voltage > 2) {
         status = "Alto Voltaje";
         statusClass += " danger";
-    } else if (voltage < 100) {
+    } else if (voltage < 1) {  // Cambiado para bajo voltaje bajo 1V
         status = "Bajo Voltaje";
         statusClass += " warning";
     } else if (current > 4.5) {
