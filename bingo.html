@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Marcado de Bingo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .control-panel {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        input[type="number"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .boletas-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .boleta {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 280px;
+        }
+        
+        .boleta h3 {
+            text-align: center;
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .boleta-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+        }
+        
+        .celda {
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .celda.marcada {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .celda::before {
+            content: attr(data-letra);
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 10px;
+            color: #7f8c8d;
+        }
+        
+        .marcados-container {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .marcados-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .numero-marcado {
+            background-color: #2ecc71;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .config-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        select, input[type="number"].config {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistema de Marcado de Bingo</h1>
+    
+    <div class="control-panel">
+        <div class="config-group">
+            <label for="cantidad-boletas">Cantidad de Boletas:</label>
+            <input type="number" id="cantidad-boletas" class="config" min="1" max="20" value="6">
+        </div>
+        
+        <div class="input-group">
+            <input type="number" id="numero-input" placeholder="Ingresa un número (1-75)" min="1" max="75">
+            <button id="marcar-btn">Marcar Número</button>
+        </div>
+        
+        <div class="input-group">
+            <button id="reiniciar-btn">Reiniciar Juego</button>
+            <button id="auto-marcar-btn">Auto-marcar Aleatorio</button>
+        </div>
+    </div>
+    
+    <div class="marcados-container">
+        <h3>Números Marcados: <span id="contador-marcados">0</span></h3>
+        <div class="marcados-list" id="marcados-list"></div>
+    </div>
+    
+    <div class="boletas-container" id="boletas-container"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables de estado
+            let numerosMarcados = new Set();
+            let boletas = [];
+            const letrasBingo = ['B', 'I', 'N', 'G', 'O'];
+            
+            // Elementos del DOM
+            const numeroInput = document.getElementById('numero-input');
+            const marcarBtn = document.getElementById('marcar-btn');
+            const reiniciarBtn = document.getElementById('reiniciar-btn');
+            const autoMarcarBtn = document.getElementById('auto-marcar-btn');
+            const boletasContainer = document.getElementById('boletas-container');
+            const marcadosList = document.getElementById('marcados-list');
+            const contadorMarcados = document.getElementById('contador-marcados');
+            const cantidadBoletasInput = document.getElementById('cantidad-boletas');
+            
+            // Rangos para cada columna
+            const rangos = {
+                'B': [1, 15],
+                'I': [16, 30],
+                'N': [31, 45],
+                'G': [46, 60],
+                'O': [61, 75]
+            };
+            
+            // Inicializar el juego
+            function inicializarJuego() {
+                numerosMarcados.clear();
+                boletas = [];
+                boletasContainer.innerHTML = '';
+                marcadosList.innerHTML = '';
+                contadorMarcados.textContent = '0';
+                
+                const cantidadBoletas = parseInt(cantidadBoletasInput.value);
+                
+                for (let i = 0; i < cantidadBoletas; i++) {
+                    const boleta = generarBoleta();
+                    boletas.push(boleta);
+                    renderizarBoleta(boleta, i + 1);
+                }
+            }
+            
+            // Generar una boleta aleatoria
+            function generarBoleta() {
+                const boleta = {
+                    id: Date.now() + Math.random(),
+                    numeros: {},
+                    celdas: {}
+                };
+                
+                // Generar números para cada columna
+                for (const letra of letrasBingo) {
+                    const [min, max] = rangos[letra];
+                    const numerosColumna = [];
+                    
+                    // Generar 5 números únicos para la columna
+                    while (numerosColumna.length < 5) {
+                        const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                        if (!numerosColumna.includes(num)) {
+                            numerosColumna.push(num);
+                        }
+                    }
+                    
+                    // Ordenar los números
+                    numerosColumna.sort((a, b) => a - b);
+                    
+                    // Guardar los números en la boleta
+                    boleta.numeros[letra] = numerosColumna;
+                }
+                
+                // El centro es "FREE" en la columna N
+                boleta.numeros['N'][2] = 'FREE';
+                
+                return boleta;
+            }
+            
+            // Renderizar una boleta en el DOM
+            function renderizarBoleta(boleta, numeroBoleta) {
+                const boletaElement = document.createElement('div');
+                boletaElement.className = 'boleta';
+                boletaElement.id = `boleta-${boleta.id}`;
+                
+                const titulo = document.createElement('h3');
+                titulo.textContent = `Boleta ${numeroBoleta}`;
+                boletaElement.appendChild(titulo);
+                
+                const grid = document.createElement('div');
+                grid.className = 'boleta-grid';
+                
+                // Crear encabezados de columnas
+                for (const letra of letrasBingo) {
+                    const celdaLetra = document.createElement('div');
+                    celdaLetra.className = 'celda letra';
+                    celdaLetra.textContent = letra;
+                    grid.appendChild(celdaLetra);
+                }
+                
+                // Crear celdas con números
+                for (let fila = 0; fila < 5; fila++) {
+                    for (let col = 0; col < 5; col++) {
+                        const letra = letrasBingo[col];
+                        const numero = boleta.numeros[letra][fila];
+                        
+                        const celda = document.createElement('div');
+                        celda.className = 'celda';
+                        celda.dataset.letra = letra;
+                        celda.dataset.numero = numero;
+                        celda.textContent = numero === 'FREE' ? 'FREE' : numero;
+                        
+                        if (numero === 'FREE') {
+                            celda.classList.add('marcada');
+                        }
+                        
+                        // Guardar referencia a la celda
+                        boleta.celdas[`${letra}-${numero}`] = celda;
+                        
+                        grid.appendChild(celda);
+                    }
+                }
+                
+                boletaElement.appendChild(grid);
+                boletasContainer.appendChild(boletaElement);
+            }
+            
+            // Marcar un número en todas las boletas
+            function marcarNumero(numero) {
+                if (numero < 1 || numero > 75) {
+                    alert('Por favor ingresa un número entre 1 y 75');
+                    return;
+                }
+                
+                if (numerosMarcados.has(numero)) {
+                    alert(`El número ${numero} ya fue marcado`);
+                    return;
+                }
+                
+                numerosMarcados.add(numero);
+                actualizarListaMarcados();
+                
+                // Determinar la letra correspondiente
+                let letra = '';
+                for (const [l, rango] of Object.entries(rangos)) {
+                    if (numero >= rango[0] && numero <= rango[1]) {
+                        letra = l;
+                        break;
+                    }
+                }
+                
+                // Marcar el número en todas las boletas
+                boletas.forEach(boleta => {
+                    const celdaKey = `${letra}-${numero}`;
+                    if (boleta.celdas[celdaKey]) {
+                        boleta.celdas[celdaKey].classList.add('marcada');
+                    }
+                });
+                
+                numeroInput.value = '';
+                numeroInput.focus();
+            }
+            
+            // Actualizar la lista de números marcados
+            function actualizarListaMarcados() {
+                marcadosList.innerHTML = '';
+                const numerosOrdenados = Array.from(numerosMarcados).sort((a, b) => a - b);
+                
+                numerosOrdenados.forEach(num => {
+                    const elemento = document.createElement('span');
+                    elemento.className = 'numero-marcado';
+                    elemento.textContent = num;
+                    marcadosList.appendChild(elemento);
+                });
+                
+                contadorMarcados.textContent = numerosMarcados.size;
+            }
+            
+            // Auto-marcar números aleatorios
+            function autoMarcarAleatorio() {
+                const numerosDisponibles = [];
+                
+                // Generar lista de números disponibles (1-75) que no estén marcados
+                for (let i = 1; i <= 75; i++) {
+                    if (!numerosMarcados.has(i)) {
+                        numerosDisponibles.push(i);
+                    }
+                }
+                
+                if (numerosDisponibles.length === 0) {
+                    alert('¡Todos los números ya han sido marcados!');
+                    return;
+                }
+                
+                // Seleccionar un número aleatorio
+                const randomIndex = Math.floor(Math.random() * numerosDisponibles.length);
+                const numeroAleatorio = numerosDisponibles[randomIndex];
+                
+                // Marcar el número
+                numeroInput.value = numeroAleatorio;
+                marcarNumero(numeroAleatorio);
+            }
+            
+            // Event listeners
+            marcarBtn.addEventListener('click', function() {
+                const numero = parseInt(numeroInput.value);
+                if (!isNaN(numero)) {
+                    marcarNumero(numero);
+                }
+            });
+            
+            numeroInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const numero = parseInt(numeroInput.value);
+                    if (!isNaN(numero)) {
+                        marcarNumero(numero);
+                    }
+                }
+            });
+            
+            reiniciarBtn.addEventListener('click', inicializarJuego);
+            
+            autoMarcarBtn.addEventListener('click', autoMarcarAleatorio);
+            
+            cantidadBoletasInput.addEventListener('change', inicializarJuego);
+            
+            // Inicializar el juego al cargar la página
+            inicializarJuego();
+        });
+    </script>
+</body>
+</html>
