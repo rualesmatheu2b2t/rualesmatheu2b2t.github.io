@@ -3,217 +3,435 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>¡Cuenta ChatGPT Oferta!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <title>🔥 Oferta Exclusiva: Cuenta ChatGPT Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;500;400&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --amarillo: #FFD700;
+      --naranja: #FF8C00;
+      --rojo: #D70000;
+      --verde: #25D366;
+      --azul: #1DA1F2;
+      --blanco: #FFFFFF;
+      --negro: #111111;
+      --gris: #444444;
+    }
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle, #fff700 0%, #ffae00 100%);
+      background: radial-gradient(circle at top, var(--amarillo) 0%, var(--naranja) 100%);
       font-family: 'Montserrat', Arial, sans-serif;
-      color: #111;
+      color: var(--negro);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      animation: gradientBG 15s ease infinite;
+      background-size: 200% 200%;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%}
+      50% {background-position: 100% 50%}
+      100% {background-position: 0% 50%}
     }
     .container {
-      max-width: 500px;
-      margin: 40px auto;
-      background: #fffde6;
-      box-shadow: 0 4px 30px #ffd60077;
-      border-radius: 18px;
-      padding: 32px 24px;
+      max-width: 580px;
+      margin: 30px auto;
+      background: var(--blanco);
+      box-shadow: 0 10px 40px rgba(255, 165, 0, 0.3);
+      border-radius: 20px;
+      padding: 35px 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    .container::before {
+      content: "OFERTA LIMITADA";
+      position: absolute;
+      top: 15px;
+      right: -50px;
+      background: var(--rojo);
+      color: white;
+      padding: 5px 50px;
+      transform: rotate(45deg);
+      font-size: 0.9rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     .logo {
-      width: 72px;
-      margin-bottom: 16px;
+      width: 80px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
     }
     h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       text-align: center;
-      margin: 0 0 22px 0;
-      letter-spacing: 1px;
-      color: #0c0c0c;
+      margin: 0 0 20px 0;
+      letter-spacing: 0.5px;
+      color: var(--negro);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #FF512F, #DD2476);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .precios {
-      margin: 14px 0 20px 0;
-      font-size: 1.45rem;
+      margin: 20px 0;
+      font-size: 1.6rem;
       display: flex;
       gap: 15px;
       align-items: center;
+      position: relative;
     }
     .antes {
-      color: #b80000;
+      color: var(--gris);
       font-weight: bold;
       text-decoration: line-through;
       position: relative;
     }
     .ahora {
-      color: #d70000;
-      font-size: 2.1rem;
+      color: var(--blanco);
+      font-size: 2.3rem;
       font-weight: bold;
-      background: #fff6a5;
-      padding: 4px 18px;
-      border-radius: 10px;
-      box-shadow: 0 1px 7px #ffd60055;
+      background: linear-gradient(135deg, #FF416C, #FF4B2B);
+      padding: 8px 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .ahora::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 45%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 55%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
     }
     .flecha {
-      font-size: 2rem;
-      color: #f57c00;
+      font-size: 2.2rem;
+      color: var(--naranja);
       margin: 0 8px;
       font-weight: bold;
       animation: flechaMove 1s infinite alternate;
     }
     @keyframes flechaMove {
-      to { transform: translateY(5px);}
+      to { transform: translateY(5px); }
     }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 18px 0 28px 0;
+    .beneficios {
       width: 100%;
+      margin: 25px 0;
     }
-    ul li {
-      font-size: 1.13rem;
-      margin-bottom: 10px;
+    .beneficio-item {
       display: flex;
       align-items: center;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+      border-left: 4px solid var(--amarillo);
     }
-    ul li:before {
-      content: '✔️';
-      margin-right: 10px;
-      color: #34a853;
-      font-size: 1.2em;
+    .beneficio-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      background: var(--blanco);
+    }
+    .beneficio-item i {
+      font-size: 1.4rem;
+      margin-right: 15px;
+      color: var(--naranja);
+      min-width: 25px;
+    }
+    .beneficio-text {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .beneficio-text strong {
+      color: var(--rojo);
+    }
+    .garantia {
+      display: flex;
+      align-items: center;
+      background: rgba(37, 211, 102, 0.1);
+      padding: 12px 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border: 1px dashed var(--verde);
+    }
+    .garantia i {
+      font-size: 2rem;
+      color: var(--verde);
+      margin-right: 15px;
+    }
+    .garantia-text {
+      font-size: 0.95rem;
+      font-weight: 500;
     }
     .qr-area {
-      background: #fff;
+      background: var(--blanco);
       border-radius: 16px;
-      box-shadow: 0 2px 10px #0001;
-      width: 180px;
-      height: 180px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      width: 200px;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 20px auto 15px auto;
+      margin: 20px auto;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--amarillo);
     }
     .qr-area:hover {
       transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     .qr-area img {
-      width: 150px;
-      height: 150px;
+      width: 170px;
+      height: 170px;
       object-fit: contain;
     }
-    .adicional {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 1.05rem;
-      color: #b80000;
-      font-weight: bold;
-    }
-    .detalles {
-      margin: 15px 0 0 0;
-      font-size: 1rem;
-      text-align: center;
-      color: #444;
-    }
-    .footer {
-      width: 100%;
-      background: #d70000;
-      color: #fff;
-      font-size: 1.23rem;
+    .qr-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--amarillo);
+      color: var(--negro);
       font-weight: bold;
       text-align: center;
-      padding: 18px 10px 18px 10px;
-      border-radius: 0 0 18px 18px;
-      margin-top: 32px;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 20px #d7000033;
+      padding: 5px;
+      font-size: 0.9rem;
     }
     .whatsapp-button {
-      background-color: #25D366;
+      background: linear-gradient(to right, var(--verde), #128C7E);
       color: white;
       border: none;
-      padding: 12px 25px;
+      padding: 15px 30px;
       border-radius: 50px;
       font-weight: bold;
-      font-size: 1.1rem;
-      margin-top: 15px;
+      font-size: 1.2rem;
+      margin: 15px 0;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
       transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .whatsapp-button:hover {
-      background-color: #128C7E;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+    }
+    .whatsapp-button i {
+      font-size: 1.5rem;
+    }
+    .contador {
+      background: var(--negro);
+      color: var(--blanco);
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contador i {
+      color: var(--rojo);
+    }
+    .testimonios {
+      width: 100%;
+      margin: 20px 0;
+    }
+    .testimonio {
+      background: var(--blanco);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
+      border-left: 3px solid var(--azul);
+    }
+    .testimonio-text {
+      font-style: italic;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    .testimonio-autor {
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: var(--azul);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .testimonio-autor i {
+      color: var(--naranja);
+    }
+    .footer {
+      width: 100%;
+      background: linear-gradient(to right, var(--rojo), #8B0000);
+      color: var(--blanco);
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px 10px;
+      border-radius: 0 0 18px 18px;
+      margin-top: 30px;
+      letter-spacing: 1px;
+      box-shadow: 0 5px 20px rgba(215, 0, 0, 0.3);
+      text-transform: uppercase;
     }
     @media (max-width: 650px) {
       .container {
-        margin: 15px 4px;
-        padding: 20px 4vw;
+        margin: 15px 10px;
+        padding: 25px 15px;
       }
-      h1 { font-size: 1.45rem;}
-      .ahora { font-size: 1.3rem; }
-      .precios { font-size: 1.1rem;}
-      .footer { font-size: 1rem;}
+      h1 { font-size: 1.6rem; }
+      .ahora { font-size: 1.8rem; padding: 6px 15px; }
+      .precios { font-size: 1.2rem; }
+      .footer { font-size: 1rem; }
+      .beneficio-text { font-size: 1rem; }
+      .whatsapp-button { font-size: 1rem; padding: 12px 25px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" class="logo">
-    <h1>¡LLÉVATE TU CUENTA CHATGPT HOY MISMO!</h1>
+    <h1>¡OFERTA EXCLUSIVA! CUENTA CHATGPT PREMIUM</h1>
+    
     <div class="precios">
       <span class="antes">$80.000</span>
       <span class="flecha">→</span>
       <span class="ahora">$19.999</span>
     </div>
-    <ul>
-      <li>Acceso Premium</li>
-      <li>Rápido y sin restricciones</li>
-      <li>Ideal para tareas, trabajos, negocios, IA y más</li>
-      <li>Soporte 24/7</li>
-    </ul>
+    
+    <div class="contador">
+      <i class="fas fa-fire"></i>
+      <span>¡ÚLTIMAS 5 CUENTAS DISPONIBLES!</span>
+    </div>
+    
+    <div class="beneficios">
+      <div class="beneficio-item">
+        <i class="fas fa-bolt"></i>
+        <div class="beneficio-text"><strong>Acceso TOTAL</strong> - Sin límites de uso, sin restricciones</div>
+      </div>
+      <div class="beneficio-item">
+        <i class="fas fa-rocket"></i>
+        <div class="beneficio-text"><strong>Respuestas Ultra Rápidas</strong> - Prioridad en los servidores</div>
+      </div>
+      <div class="beneficio-item">
+        <i class="fas fa-gem"></i>
+        <div class="beneficio-text"><strong>GPT-4 Turbo</strong> - La versión más avanzada disponible</div>
+      </div>
+      <div class="beneficio-item">
+        <i class="fas fa-file-alt"></i>
+        <div class="beneficio-text"><strong>Largo contexto</strong> - Hasta 128k tokens de memoria</div>
+      </div>
+      <div class="beneficio-item">
+        <i class="fas fa-image"></i>
+        <div class="beneficio-text"><strong>Generación de imágenes</strong> - Crea imágenes con DALL-E 3</div>
+      </div>
+      <div class="beneficio-item">
+        <i class="fas fa-lock"></i>
+        <div class="beneficio-text"><strong>Seguridad garantizada</strong> - Cuenta privada y protegida</div>
+      </div>
+    </div>
+    
+    <div class="garantia">
+      <i class="fas fa-shield-alt"></i>
+      <div class="garantia-text">
+        <strong>GARANTÍA 100% DE SATISFACCIÓN</strong><br>
+        Si no quedas satisfecho, te devolvemos tu dinero.
+      </div>
+    </div>
+    
+    <div class="testimonios">
+      <div class="testimonio">
+        <div class="testimonio-text">
+          "Compré la cuenta y es increíble lo rápido que responde. He podido automatizar mi negocio y ahorrar horas de trabajo. ¡Totalmente recomendado!"
+        </div>
+        <div class="testimonio-autor">
+          <i class="fas fa-star"></i> Carlos M., Emprendedor
+        </div>
+      </div>
+      <div class="testimonio">
+        <div class="testimonio-text">
+          "El soporte fue excelente, me ayudaron con la configuración y ahora uso ChatGPT para mis estudios universitarios. Vale cada peso invertido."
+        </div>
+        <div class="testimonio-autor">
+          <i class="fas fa-star"></i> Laura G., Estudiante
+        </div>
+      </div>
+    </div>
     
     <div class="qr-area" onclick="window.open('https://wa.me/573234554269', '_blank')">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/573234554269" alt="Código QR WhatsApp">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=https://wa.me/573234554269?text=Quiero%20mi%20cuenta%20ChatGPT%20Premium" alt="Código QR WhatsApp">
+      <div class="qr-label">ESCANEA PARA WHATSAPP</div>
     </div>
     
     <button class="whatsapp-button" onclick="window.open('https://wa.me/573234554269', '_blank')">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Contactar por WhatsApp
+      <i class="fab fa-whatsapp"></i>
+      COMPRAR AHORA
     </button>
     
-    <div class="adicional">
-      Escanea el QR o haz clic en el botón
-    </div>
-    <div class="detalles">
-      • Cupos LIMITADOS<br>
-      • Promoción por tiempo limitado<br>
-      • Pago seguro y garantizado
+    <div class="contador">
+      <i class="fas fa-clock"></i>
+      <span>OFERTA TERMINA EN: <span id="countdown">23:59:59</span></span>
     </div>
   </div>
+  
   <div class="footer">
-    De $80.000 a SOLO $19.999 &nbsp;—&nbsp; ¡AHORRA MÁS DEL 75%!
+    <i class="fas fa-gift"></i> BONO EXTRA: Guía Premium de Prompting incluida <i class="fas fa-gift"></i>
   </div>
   
   <script>
-    // Opcional: Puedes añadir este código para trackear clics en el QR
-    document.querySelector('.qr-area').addEventListener('click', function() {
-      // Aquí podrías añadir código de analytics si lo deseas
-      console.log('QR de WhatsApp clickeado');
+    // Contador regresivo
+    function updateCountdown() {
+      const now = new Date();
+      const endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59, 999);
+      
+      const diff = endOfDay - now;
+      
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('countdown').textContent = 
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    
+    // Efecto de confeti al hacer clic en el botón
+    document.querySelector('.whatsapp-button').addEventListener('click', function() {
+      // Aquí podrías añadir código de confeti si deseas
+      console.log('Redirigiendo a WhatsApp');
     });
   </script>
 </body>
